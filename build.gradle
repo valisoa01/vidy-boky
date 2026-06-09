@@ -9,8 +9,9 @@ plugins {
     id 'org.openapi.generator' version '7.7.0'
 
     id 'jacoco'
+    id 'org.jetbrains.kotlin.jvm'
 
-    
+
 }
 
 jacoco {
@@ -26,8 +27,6 @@ repositories {
 
 java {
     group = 'com.example.demo'
-    sourceCompatibility = '21'
-    targetCompatibility = '21'
 }
 
 configurations {
@@ -115,7 +114,7 @@ dependencies {
 
     implementation 'com.amazonaws.serverless:aws-serverless-java-container-springboot3:2.1.0'
     implementation 'software.amazon.awssdk:aws-query-protocol:2.20.26'
-
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.2.2'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.3'
     implementation 'com.amazonaws:aws-lambda-java-events:3.11.3'
     implementation 'software.amazon.awssdk:sqs:2.21.40'
@@ -146,5 +145,9 @@ dependencies {
     testImplementation 'org.junit-pioneer:junit-pioneer:2.2.0'
 
     implementation 'org.postgresql:postgresql:42.7.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
+}
+kotlin {
+    jvmToolchain(21)
 }
