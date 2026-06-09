@@ -6,13 +6,13 @@ import java.util.UUID;
 import lombok.*;
 
 @Entity
-@Table(name = "genre")
+@Table(name = "customer")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Genre {
+public class Customer {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -21,9 +21,12 @@ public class Genre {
   @Column(name = "name", length = 100, nullable = false)
   private String name;
 
-  @Column(name = "description", length = 100)
-  private String description;
+  @Column(name = "firstname", length = 100, nullable = false)
+  private String firstname;
 
-  @ManyToMany(mappedBy = "genres")
-  private List<Book> books;
+  @Column(name = "email", length = 100, nullable = false, unique = true)
+  private String email;
+
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<Order> orders;
 }

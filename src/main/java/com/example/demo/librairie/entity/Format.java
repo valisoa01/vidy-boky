@@ -1,24 +1,26 @@
 package com.example.demo.librairie.entity;
 
-import java.util.UUID;
 import jakarta.persistence.*;
-import lombok.*;
 import java.util.List;
+import java.util.UUID;
+import lombok.*;
 
 @Entity
 @Table(name = "format")
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Format {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
-    @Column(name = "type_format", length = 100, nullable = false)
-    private String typeFormat;
+  @Column(name = "format_type", length = 100, nullable = false)
+  private String formatType;
 
-    @OneToMany(mappedBy = "format", cascade = CascadeType.ALL)
-    private List<LivreFormat> livreFormats;
+  @OneToMany(mappedBy = "format", cascade = CascadeType.ALL)
+  private List<BookFormat> bookFormats;
 }
