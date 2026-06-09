@@ -5,12 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookFormatRequestDTO {
-    private Integer bookId;
+    private UUID bookId;
     private Integer formatId;
     private BigDecimal price;
 }
