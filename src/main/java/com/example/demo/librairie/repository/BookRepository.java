@@ -4,11 +4,17 @@ import com.example.demo.librairie.entity.Book;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
+ 
 @Repository
-public interface BookRepository extends JpaRepository<Book, Integer> {
+public interface BookRepository extends JpaRepository<Book, UUID> {
 
-  List<Book> findByTitleContainingIgnorCase(String title);
+ 
+    List<Book> findByTitleContainingIgnoreCase(String title);
 
-  List<Book> findByDatePublication(String datePublication);
+    List<Book> findByDatePublication(LocalDate publicationDate);
+
+    List<Book> findByAuthors_Id(UUID authorId);
+
+    List<Book> findByGenres_Id(UUID genreId);
+    List<Book> findByDatePublication(String datePublication);
 }
