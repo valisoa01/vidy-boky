@@ -2,15 +2,14 @@ package com.example.demo.librairie.controller;
 
 import com.example.demo.librairie.entity.Book;
 import com.example.demo.librairie.service.BookService;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/books")
@@ -39,18 +38,18 @@ public class BookController {
   }
 
   @GetMapping("/search/gender/{genderId}")
-  public ResponseEntity<List<Book>> getByGenre(@PathVariable("genderId") UUID genreId) { // ← fix
+  public ResponseEntity<List<Book>> getByGenre(@PathVariable("genderId") UUID genreId) {
     return ResponseEntity.ok(bookService.getLivreByGenre(genreId));
   }
 
   @GetMapping("/search/date")
   public ResponseEntity<List<Book>> getByDate(
-          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
     return ResponseEntity.ok(bookService.getLivreByDate(date));
   }
 
   @PostMapping
-  public ResponseEntity<Book> create(@RequestBody Book book) {                           // ← fix
+  public ResponseEntity<Book> create(@RequestBody Book book) {
     return ResponseEntity.status(HttpStatus.CREATED).body(bookService.createLivre(book));
   }
 
