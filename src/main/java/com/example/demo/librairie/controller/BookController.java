@@ -26,9 +26,14 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getById(@PathVariable UUID id) {
-        return bookService.getById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return bookService.getById(id);
+        if (optional.isPresent()) {
+            Book book = optional.get();
+            return ResponseEntity.ok(book);
+        } else {
+            return ResponseEntity.notFound()
+                    .build();
+        }
     }
 
     @GetMapping("/search/title")
