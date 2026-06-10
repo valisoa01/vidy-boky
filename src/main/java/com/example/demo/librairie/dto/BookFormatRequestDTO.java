@@ -1,6 +1,5 @@
 package com.example.demo.librairie.dto;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookFormatRequestDTO {
-  private UUID bookId;
-  private UUID formatId;
-  private BigDecimal price;
+    private UUID bookId;
+    private UUID formatId;
+    private Double price;
 }

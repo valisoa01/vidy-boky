@@ -1,5 +1,5 @@
 package com.example.demo.librairie.service;
-
+/*
 import com.example.demo.librairie.entity.Book;
 import com.example.demo.librairie.repository.BookRepository;
 import java.util.List;
@@ -15,3 +15,5 @@ public class BookService {
         return bookRepository.findAll();
     }
 }
+
+ */

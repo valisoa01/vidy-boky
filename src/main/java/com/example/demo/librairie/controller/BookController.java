@@ -1,5 +1,5 @@
 package com.example.demo.librairie.controller;
-
+/*
 import com.example.demo.librairie.entity.Book;
 import com.example.demo.librairie.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -60,4 +60,4 @@ public class BookController {
         bookService.delete(id);
         return ResponseEntity.noContent().build();
     }
-}
+}*/
