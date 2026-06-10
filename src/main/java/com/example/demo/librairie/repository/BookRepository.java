@@ -1,7 +1,6 @@
 package com.example.demo.librairie.repository;
 
 import com.example.demo.librairie.entity.Book;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -16,7 +15,6 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
   List<Book> findByDatePublication(LocalDate publicationDate);
 
   List<Book> findByAuthors_Id(UUID authorId);
-
 
   List<Book> findByGenresId(UUID genreId);
 

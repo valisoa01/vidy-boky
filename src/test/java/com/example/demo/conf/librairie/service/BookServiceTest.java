@@ -7,7 +7,6 @@ import com.example.demo.librairie.entity.Book;
 import com.example.demo.librairie.entity.BookFormat;
 import com.example.demo.librairie.repository.BookRepository;
 import com.example.demo.librairie.service.BookService;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -88,7 +87,7 @@ class BookServiceTest {
     Book book1 = Book.builder().title("Effective Java").build();
     Book book2 = Book.builder().title("Java for Beginners").build();
     when(bookRepository.findByTitleContainingIgnoreCase(searchTitle))
-            .thenReturn(List.of(book1, book2));
+        .thenReturn(List.of(book1, book2));
 
     List<Book> result = bookService.getLivreByTitle(searchTitle);
 
@@ -131,12 +130,12 @@ class BookServiceTest {
     Book bookToSave = Book.builder().title("Nouveau Livre").isbn("123-456").build();
     UUID generatedId = UUID.randomUUID();
     Book savedBook =
-            Book.builder()
-                    .id(generatedId)
-                    .title("Nouveau Livre")
-                    .isbn("123-456")
-                    .creationDate(LocalDate.now())
-                    .build();
+        Book.builder()
+            .id(generatedId)
+            .title("Nouveau Livre")
+            .isbn("123-456")
+            .creationDate(LocalDate.now())
+            .build();
 
     when(bookRepository.save(bookToSave)).thenReturn(savedBook);
 
