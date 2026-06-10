@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -84,7 +85,7 @@ class BookControllerTest {
 
     @Test
     void getById() throws Exception {
-        when(bookService.getById(sampleId)).thenReturn(Optional.of(sampleBook));
+        when(bookService.getById(sampleId)).thenReturn(sampleBook);
 
         mockMvc.perform(get("/api/books/{id}", sampleId))
                 .andExpect(status().isOk())
@@ -97,7 +98,8 @@ class BookControllerTest {
     @Test
     void getById_notFound() throws Exception {
         UUID unknownId = UUID.randomUUID();
-        when(bookService.getById(unknownId)).thenReturn(Optional.empty());
+        when(bookService.getById(unknownId))
+                .thenThrow(new RuntimeException("Book not found")); // ← on throw, pas Optional.empty()
 
         mockMvc.perform(get("/api/books/{id}", unknownId))
                 .andExpect(status().isNotFound());
@@ -107,7 +109,7 @@ class BookControllerTest {
 
     @Test
     void getByTitle() throws Exception {
-        when(bookService.getByTitle("Petit")).thenReturn(List.of(sampleBook));
+        when(bookService.getLivreByTitle("Petit")).thenReturn(List.of(sampleBook));
 
         mockMvc.perform(get("/api/books/search/title")
                         .param("title", "Petit"))
@@ -115,25 +117,25 @@ class BookControllerTest {
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].title").value("Le Petit Prince"));
 
-        verify(bookService, times(1)).getByTitle("Petit");
+        verify(bookService, times(1)).getLivreByTitle("Petit");
     }
 
     @Test
     void getByGender() throws Exception {
         UUID genreId = UUID.randomUUID();
-        when(bookService.getByGender(genreId)).thenReturn(List.of(sampleBook));
+        when(bookService.getLivreByGenre(genreId)).thenReturn(List.of(sampleBook));
 
         mockMvc.perform(get("/api/books/search/gender/{genderId}", genreId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].title").value("Le Petit Prince"));
 
-        verify(bookService, times(1)).getByGender(genreId);
+        verify(bookService, times(1)).getLivreByGenre(genreId);
     }
     @Test
     void getByDate() throws Exception {
         LocalDate date = LocalDate.of(1943, 4, 6);
-        when(bookService.getByDate(date)).thenReturn(List.of(sampleBook));
+        when(bookService.getLivreByDate(date)).thenReturn(List.of(sampleBook));
 
         mockMvc.perform(get("/api/books/search/date")
                         .param("date", "1943-04-06"))
@@ -141,11 +143,11 @@ class BookControllerTest {
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].title").value("Le Petit Prince"));
 
-        verify(bookService, times(1)).getByDate(date);
+        verify(bookService, times(1)).getLivreByDate(date);
     }
     @Test
     void create() throws Exception {
-        when(bookService.create(any(Book.class))).thenReturn(sampleBook);
+        when(bookService.createLivre(any(Book.class))).thenReturn(sampleBook);
 
         mockMvc.perform(post("/api/books")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -154,7 +156,7 @@ class BookControllerTest {
                 .andExpect(jsonPath("$.title").value("Le Petit Prince"))
                 .andExpect(jsonPath("$.isbn").value("978-2-07-040850-4"));
 
-        verify(bookService, times(1)).create(any(Book.class));
+        verify(bookService, times(1)).createLivre(any(Book.class));
     }
 
     @Test
@@ -167,7 +169,7 @@ class BookControllerTest {
                 .publicationDate(LocalDate.of(1993, 4, 6))
                 .build();
 
-        when(bookService.update(eq(sampleId), any(Book.class))).thenReturn(updatedBook);
+        when(bookService.updateLivre(eq(sampleId), any(Book.class))).thenReturn(updatedBook);
 
         mockMvc.perform(put("/api/books/{id}", sampleId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -175,16 +177,16 @@ class BookControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Le Petit Prince - Édition spéciale"));
 
-        verify(bookService, times(1)).update(eq(sampleId), any(Book.class));
+        verify(bookService, times(1)).updateLivre(eq(sampleId), any(Book.class));
     }
 
     @Test
     void delete() throws Exception {
-        doNothing().when(bookService).delete(sampleId);
+        doNothing().when(bookService).deleteLivre(sampleId);
 
-        mockMvc.perform(delete("/api/books/{id}", sampleId))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/books/{id}", sampleId))
                 .andExpect(status().isNoContent());
 
-        verify(bookService, times(1)).delete(sampleId);
+        verify(bookService, times(1)).deleteLivre(sampleId);
     }
 }
