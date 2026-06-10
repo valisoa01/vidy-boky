@@ -1,11 +1,9 @@
 package com.example.demo.librairie.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 import com.example.demo.librairie.entity.Book;
 import com.example.demo.librairie.repository.BookRepository;
-
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
