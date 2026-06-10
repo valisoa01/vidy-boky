@@ -1,12 +1,17 @@
 package com.example.demo.librairie.controller;
 
 import com.example.demo.librairie.entity.Book; 
-import com.example.demo.librairie.service.BookService;          
-import lombok.RequiredArgsConstructor;                           
+import com.example.demo.librairie.service.BookService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
  import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
  
@@ -23,41 +28,39 @@ public class BookController {
 
   @GetMapping("/{id}")
   public ResponseEntity<Book> getById(@PathVariable UUID id) {
-    return bookService
-        .getById(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+    return ResponseEntity.ok(bookService.getById(id));
+
   }
 
   @GetMapping("/search/title")
   public ResponseEntity<List<Book>> getByTitle(@RequestParam String title) {
-    return ResponseEntity.ok(bookService.getByTitle(title));
+    return ResponseEntity.ok(bookService.getLivreByTitle(title));
   }
 
   @GetMapping("/search/gender/{genderId}")
-  public ResponseEntity<List<Book>> getByGender(@PathVariable UUID genderId) {
-    return ResponseEntity.ok(bookService.getByGender(genderId));
+  public ResponseEntity<List<Book>> getByGenre(@PathVariable UUID genreId) {
+    return ResponseEntity.ok(bookService.getLivreByGenre(genreId));
   }
 
   @GetMapping("/search/date")
   public ResponseEntity<List<Book>> getByDate(
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-    return ResponseEntity.ok(bookService.getByDate(date));
+    return ResponseEntity.ok(bookService.getLivreByDate(date));
   }
 
   @PostMapping
   public ResponseEntity<Book> create(@RequestParam Book book) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(bookService.create(book));
+    return ResponseEntity.status(HttpStatus.CREATED).body(bookService.createLivre(book));
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<Book> update(@PathVariable UUID id, @RequestBody Book book) {
-    return ResponseEntity.ok(bookService.update(id, book));
+    return ResponseEntity.ok(bookService.updateLivre(id, book));
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> delete(@PathVariable UUID id) {
-    bookService.delete(id);
+    bookService.deleteLivre(id);
     return ResponseEntity.noContent().build();
   }
 } 
