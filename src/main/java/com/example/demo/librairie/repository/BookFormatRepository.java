@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,34 +16,40 @@ import java.util.UUID;
 @Repository
 public interface BookFormatRepository extends JpaRepository<BookFormat, UUID> {
 
-    List<BookFormat> findAll();
+    List<BookFormat> findByBookId(UUID bookId);
 
-    List<BookFormat> findAllById(Iterable<UUID> uuids);
+    List<BookFormat> findByFormatId(UUID formatId);
 
-    Optional<BookFormat> findByFormatName(String formatName);
+    Optional<BookFormat> findByBookIdAndFormatId(UUID bookId, UUID formatId);
 
-    List<BookFormat> findByFormatNameContainingIgnoreCase(String keyword);
+    List<BookFormat> findByPriceLessThanEqual(BigDecimal maxPrice);
 
-    List<BookFormat> findByPriceMultiplierGreaterThan(Double min);
+    List<BookFormat> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
 
-    List<BookFormat> findByPriceMultiplierLessThan(Double max);
+    boolean existsByBookIdAndFormatId(UUID bookId, UUID formatId);
 
-    List<BookFormat> findByPriceMultiplierBetween(Double min, Double max);
+    @Query("SELECT bf FROM BookFormat bf WHERE LOWER(bf.format.formatType) = LOWER(:formatType)")
+    List<BookFormat> findByFormatType(@Param("formatType") String formatType);
 
-    @Modifying
-    @Transactional
-    void deleteByFormatName(String formatName);
-
-    @Modifying
-    @Transactional
-    long deleteByPriceMultiplierLessThan(Double max);
+    @Query("SELECT bf FROM BookFormat bf WHERE LOWER(bf.book.title) LIKE LOWER(CONCAT('%', :title, '%'))")
+    List<BookFormat> findByBookTitleContaining(@Param("title") String title);
 
     @Modifying
     @Transactional
-    @Query("UPDATE BookFormat bf SET bf.priceMultiplier = :newPrice WHERE bf.formatName = :name")
-    int updatePriceMultiplierByFormatName(@Param("name") String formatName, @Param("newPrice") Double newPrice);
+    @Query("UPDATE BookFormat bf SET bf.price = :price WHERE bf.book.id = :bookId AND bf.format.id = :formatId")
+    int updatePrice(@Param("bookId") UUID bookId,
+                    @Param("formatId") UUID formatId,
+                    @Param("price") BigDecimal price);
 
-    boolean existsByFormatName(String formatName);
+    @Modifying
+    @Transactional
+    void deleteByBookIdAndFormatId(UUID bookId, UUID formatId);
 
-    long countByPriceMultiplierGreaterThan(Double min);
+    @Modifying
+    @Transactional
+    void deleteByBookId(UUID bookId);
+
+    @Modifying
+    @Transactional
+    void deleteByFormatId(UUID formatId);
 }

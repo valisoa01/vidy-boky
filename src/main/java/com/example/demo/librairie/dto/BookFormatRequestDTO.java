@@ -12,6 +12,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class BookFormatRequestDTO {
     private UUID bookId;
-    private Integer formatId;
+    private UUID formatId;
     private BigDecimal price;
 }
