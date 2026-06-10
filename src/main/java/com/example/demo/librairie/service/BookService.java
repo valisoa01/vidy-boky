@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class BookService {
-  private final BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
-  public List<Book> getAll() {
+   public List<Book> getAll() {
     return bookRepository.findAll();
   }
 
@@ -76,3 +76,8 @@ public class BookService {
     bookRepository.deleteById(id);
   }
 }
+     public List<Book> getAll() {
+        return bookRepository.findAll();
+    }
+}
+ 

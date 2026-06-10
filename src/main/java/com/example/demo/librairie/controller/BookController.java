@@ -1,7 +1,6 @@
 package com.example.demo.librairie.controller;
 
-import com.example.demo.librairie.entity.Book;
- 
+import com.example.demo.librairie.entity.Book; 
 import com.example.demo.librairie.service.BookService;          
 import lombok.RequiredArgsConstructor;                           
  import org.springframework.format.annotation.DateTimeFormat;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
+ 
 @RestController
 @RequestMapping("/api/books")
 @RequiredArgsConstructor
@@ -60,5 +60,4 @@ public class BookController {
     bookService.delete(id);
     return ResponseEntity.noContent().build();
   }
-}
- 
+} 
