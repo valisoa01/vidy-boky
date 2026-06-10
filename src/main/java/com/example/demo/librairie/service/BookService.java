@@ -37,7 +37,7 @@ public class BookService {
     }
 
     public List<Book> getLivreByGenre(UUID genreId) {
-        return bookRepository.findByGenresId(genreId);
+        return bookRepository.findByGenres_Id(genreId);
     }
 
     public List<Book> getLivreByDate(LocalDate date) {
