@@ -1,5 +1,7 @@
 package com.example.demo.librairie.repository;
 
+public class BookFormatRepository {}
+ 
 import com.example.demo.librairie.entity.BookFormat;
 import java.math.BigDecimal;
 import java.util.List;
