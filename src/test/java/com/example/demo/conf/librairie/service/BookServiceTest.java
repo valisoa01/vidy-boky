@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.example.demo.librairie.entity.Book;
+import com.example.demo.librairie.entity.BookFormat;
 import com.example.demo.librairie.repository.BookRepository;
 import com.example.demo.librairie.service.BookService;
 import java.util.List;
@@ -59,5 +60,39 @@ class BookServiceTest {
 
     assertTrue(exception.getMessage().contains("Book not found with id: " + bookId));
     verify(bookRepository, times(1)).findById(bookId);
+  }
+
+  @Test
+  void getFormatByLivre_ShouldReturnListOfFormats() {
+    UUID bookId = UUID.randomUUID();
+    BookFormat format1 = BookFormat.builder().id(UUID.randomUUID()).build();
+    BookFormat format2 = BookFormat.builder().id(UUID.randomUUID()).build();
+    List<BookFormat> expectedFormats = List.of(format1, format2);
+
+    Book book = Book.builder().id(bookId).formats(expectedFormats).build();
+
+    when(bookRepository.findById(bookId)).thenReturn(Optional.of(book));
+
+    List<BookFormat> result = bookService.getFormatByLivre(bookId);
+
+    assertNotNull(result);
+    assertEquals(2, result.size());
+    verify(bookRepository, times(1)).findById(bookId);
+  }
+
+  @Test
+  void getLivreByTitle_ShouldReturnMatchingBooks() {
+    String searchTitle = "java";
+    Book book1 = Book.builder().title("Effective Java").build();
+    Book book2 = Book.builder().title("Java for Beginners").build();
+    when(bookRepository.findByTitleContainingIgnoreCase(searchTitle))
+            .thenReturn(List.of(book1, book2));
+
+    List<Book> result = bookService.getLivreByTitle(searchTitle);
+
+    assertNotNull(result);
+    assertEquals(2, result.size());
+    assertEquals("Effective Java", result.get(0).getTitle());
+    verify(bookRepository, times(1)).findByTitleContainingIgnoreCase(searchTitle);
   }
 }

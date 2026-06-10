@@ -1,8 +1,11 @@
 package com.example.demo.librairie.service;
 
 import com.example.demo.librairie.entity.Book;
+import com.example.demo.librairie.entity.BookFormat;
 import com.example.demo.librairie.repository.BookRepository;
 import java.util.List;
+import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +23,14 @@ public class BookService {
         .findById(id)
         .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
   }
+
+  public List<BookFormat> getFormatByLivre(UUID bookId) {
+    Book book =
+            bookRepository
+                    .findById(bookId)
+                    .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
+    return book.getFormats();
+  }
+
+
 }
