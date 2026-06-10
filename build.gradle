@@ -110,6 +110,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:3.2.2'
     testImplementation 'org.testcontainers:testcontainers:2.0.2'
 
+    testImplementation 'com.h2database:h2'
+
 
     testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
