@@ -148,4 +148,23 @@ class BookServiceTest {
     assertNotNull(result.getCreationDate());
     verify(bookRepository, times(1)).save(bookToSave);
   }
+
+  @Test
+  void updateLivre_WhenBookExists_ShouldUpdateAndReturnBook() {
+    UUID bookId = UUID.randomUUID();
+    Book existingBook = Book.builder().id(bookId).title("Ancien Titre").isbn("111").build();
+    Book updatedInfo = Book.builder().title("Nouveau Titre").isbn("222").build();
+    Book savedBook = Book.builder().id(bookId).title("Nouveau Titre").isbn("222").build();
+
+    when(bookRepository.findById(bookId)).thenReturn(Optional.of(existingBook));
+    when(bookRepository.save(any(Book.class))).thenReturn(savedBook);
+
+    Book result = bookService.updateLivre(bookId, updatedInfo);
+
+    assertNotNull(result);
+    assertEquals("Nouveau Titre", result.getTitle());
+    assertEquals("222", result.getIsbn());
+    verify(bookRepository, times(1)).findById(bookId);
+    verify(bookRepository, times(1)).save(any(Book.class));
+  }
 }

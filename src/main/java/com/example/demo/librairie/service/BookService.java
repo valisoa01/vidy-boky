@@ -53,4 +53,21 @@ public class BookService {
     return bookRepository.save(book);
   }
 
+  public Book updateLivre(UUID id, Book updatedBook) {
+    Book existingBook =
+            bookRepository
+                    .findById(id)
+                    .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+
+    existingBook.setTitle(updatedBook.getTitle());
+    existingBook.setIsbn(updatedBook.getIsbn());
+    existingBook.setDescription(updatedBook.getDescription());
+    existingBook.setUrl(updatedBook.getUrl());
+    existingBook.setPublicationDate(updatedBook.getPublicationDate());
+    existingBook.setGenres(updatedBook.getGenres());
+    existingBook.setAuthors(updatedBook.getAuthors());
+    existingBook.setFormats(updatedBook.getFormats());
+
+    return bookRepository.save(existingBook);
+  }
 }
