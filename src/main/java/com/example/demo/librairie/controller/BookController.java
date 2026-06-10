@@ -1,18 +1,18 @@
 package com.example.demo.librairie.controller;
 
 import com.example.demo.librairie.entity.Book;
-import com.example.demo.librairie.service.BookService;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
-import lombok.AllArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+ 
+import com.example.demo.librairie.service.BookService;          
+import lombok.RequiredArgsConstructor;                           
+ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
+@RequestMapping("/api/books")
+@RequiredArgsConstructor
 public class BookController {
   private final BookService bookService;
 
@@ -61,3 +61,4 @@ public class BookController {
     return ResponseEntity.noContent().build();
   }
 }
+ 
