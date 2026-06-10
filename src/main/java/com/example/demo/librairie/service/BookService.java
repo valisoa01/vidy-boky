@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class BookService {
-  private final BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
-  public List<Book> getAll() {
-    return bookRepository.findAll();
-  }
+    public List<Book> getAll() {
+        return bookRepository.findAll();
+    }
 }
