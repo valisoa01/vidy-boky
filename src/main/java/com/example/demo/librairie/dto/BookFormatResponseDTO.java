@@ -1,20 +1,20 @@
 package com.example.demo.librairie.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class BookFormatResponseDTO {
-    private Integer id;
-    private Integer bookId;
+    private UUID id;
+    private UUID bookId;
     private String bookTitle;
-    private Integer formatId;
+    private UUID formatId;
     private String typeFormat;
-    private BigDecimal price;
+    private Double price;
 }
