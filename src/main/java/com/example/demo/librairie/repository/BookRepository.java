@@ -1,16 +1,14 @@
 package com.example.demo.librairie.repository;
 
 import com.example.demo.librairie.entity.Book;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
-
+ 
 @Repository
 public interface BookRepository extends JpaRepository<Book, UUID> {
 
+ 
     List<Book> findByTitleContainingIgnoreCase(String title);
 
     List<Book> findByDatePublication(LocalDate publicationDate);
@@ -18,5 +16,5 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
     List<Book> findByAuthors_Id(UUID authorId);
 
     List<Book> findByGenres_Id(UUID genreId);
-
+    List<Book> findByDatePublication(String datePublication);
 }
