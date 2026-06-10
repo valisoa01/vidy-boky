@@ -125,4 +125,27 @@ class BookServiceTest {
     assertEquals(searchDate, result.get(0).getPublicationDate());
     verify(bookRepository, times(1)).findByPublicationDate(searchDate);
   }
+
+  @Test
+  void createLivre_ShouldSaveAndReturnBook() {
+    Book bookToSave = Book.builder().title("Nouveau Livre").isbn("123-456").build();
+    UUID generatedId = UUID.randomUUID();
+    Book savedBook =
+            Book.builder()
+                    .id(generatedId)
+                    .title("Nouveau Livre")
+                    .isbn("123-456")
+                    .creationDate(LocalDate.now())
+                    .build();
+
+    when(bookRepository.save(bookToSave)).thenReturn(savedBook);
+
+    Book result = bookService.createLivre(bookToSave);
+
+    assertNotNull(result);
+    assertEquals(generatedId, result.getId());
+    assertEquals("Nouveau Livre", result.getTitle());
+    assertNotNull(result.getCreationDate());
+    verify(bookRepository, times(1)).save(bookToSave);
+  }
 }

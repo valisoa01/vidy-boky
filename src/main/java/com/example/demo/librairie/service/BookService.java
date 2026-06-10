@@ -46,4 +46,11 @@ public class BookService {
     return bookRepository.findByPublicationDate(date);
   }
 
+  public Book createLivre(Book book) {
+    if (book.getCreationDate() == null) {
+      book.setCreationDate(LocalDate.now());
+    }
+    return bookRepository.save(book);
+  }
+
 }
