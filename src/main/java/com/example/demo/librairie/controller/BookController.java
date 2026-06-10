@@ -24,8 +24,9 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getById(@PathVariable UUID id) {
+ 
         return ResponseEntity.ok(bookService.getById(id));
-    }
+     }
 
     @GetMapping("/search/title")
     public ResponseEntity<List<Book>> getByTitle(@RequestParam String title) {
