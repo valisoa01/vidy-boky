@@ -1,4 +1,3 @@
 package com.example.demo.librairie.controller;
 
-public class BookController {
-}
+public class BookController {}
