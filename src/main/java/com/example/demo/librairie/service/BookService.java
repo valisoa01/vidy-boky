@@ -31,8 +31,13 @@ public class BookService {
                     .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
     return book.getFormats();
   }
+
   public List<Book> getLivreByTitle(String title) {
     return bookRepository.findByTitleContainingIgnoreCase(title);
+  }
+
+  public List<Book> getLivreByGenre(UUID genreId) {
+    return bookRepository.findByGenresId(genreId);
   }
 
 }
