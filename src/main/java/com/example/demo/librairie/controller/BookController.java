@@ -7,7 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -16,7 +15,6 @@ import java.util.UUID;
 @RequestMapping("/api/books")
 @RequiredArgsConstructor
 public class BookController {
-
     private final BookService bookService;
 
     @GetMapping
@@ -26,15 +24,9 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getById(@PathVariable UUID id) {
-        return bookService.getById(id);
-        if (optional.isPresent()) {
-            Book book = optional.get();
-            return ResponseEntity.ok(book);
-        } else {
-            return ResponseEntity.notFound()
-                    .build();
-        }
-    }
+ 
+        return ResponseEntity.ok(bookService.getById(id));
+     }
 
     @GetMapping("/search/title")
     public ResponseEntity<List<Book>> getByTitle(@RequestParam String title) {
