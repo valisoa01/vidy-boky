@@ -1,4 +1,4 @@
-package com.example.demo.conf.librairie.librairie;
+package com.example.demo.conf.librairie.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
