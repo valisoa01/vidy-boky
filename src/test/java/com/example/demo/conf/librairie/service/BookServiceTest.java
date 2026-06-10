@@ -7,6 +7,8 @@ import com.example.demo.librairie.entity.Book;
 import com.example.demo.librairie.entity.BookFormat;
 import com.example.demo.librairie.repository.BookRepository;
 import com.example.demo.librairie.service.BookService;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -108,5 +110,19 @@ class BookServiceTest {
     assertEquals(1, result.size());
     assertEquals("Livre de Science-Fiction", result.get(0).getTitle());
     verify(bookRepository, times(1)).findByGenresId(genreId);
+  }
+
+  @Test
+  void getLivreByDute_ShouldReturnBooksWithMatchingPublicationDate() {
+    LocalDate searchDate = LocalDate.of(2026, 3, 20);
+    Book book = Book.builder().title("Livre Temporel").publicationDate(searchDate).build();
+    when(bookRepository.findByPublicationDate(searchDate)).thenReturn(List.of(book));
+
+    List<Book> result = bookService.getLivreByDate(searchDate);
+
+    assertNotNull(result);
+    assertEquals(1, result.size());
+    assertEquals(searchDate, result.get(0).getPublicationDate());
+    verify(bookRepository, times(1)).findByPublicationDate(searchDate);
   }
 }

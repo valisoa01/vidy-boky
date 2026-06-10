@@ -3,6 +3,8 @@ package com.example.demo.librairie.service;
 import com.example.demo.librairie.entity.Book;
 import com.example.demo.librairie.entity.BookFormat;
 import com.example.demo.librairie.repository.BookRepository;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,6 +40,10 @@ public class BookService {
 
   public List<Book> getLivreByGenre(UUID genreId) {
     return bookRepository.findByGenresId(genreId);
+  }
+
+  public List<Book> getLivreByDate(LocalDate date) {
+    return bookRepository.findByPublicationDate(date);
   }
 
 }
