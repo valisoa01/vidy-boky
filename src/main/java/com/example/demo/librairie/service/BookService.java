@@ -14,4 +14,10 @@ public class BookService {
   public List<Book> getAll() {
     return bookRepository.findAll();
   }
+
+  public Book getById(java.util.UUID id) {
+    return bookRepository
+        .findById(id)
+        .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+  }
 }
