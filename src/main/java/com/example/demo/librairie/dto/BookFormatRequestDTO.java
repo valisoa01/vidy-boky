@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookFormatRequestDTO {
-    private UUID bookId;
-    private UUID formatId;
-    private Double price;
+  private UUID bookId;
+  private UUID formatId;
+  private Double price;
 }
