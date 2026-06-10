@@ -167,4 +167,16 @@ class BookServiceTest {
     verify(bookRepository, times(1)).findById(bookId);
     verify(bookRepository, times(1)).save(any(Book.class));
   }
+
+  @Test
+  void deleteLivre_WhenBookExists_ShouldDeleteSuccessfully() {
+    UUID bookId = UUID.randomUUID();
+    when(bookRepository.existsById(bookId)).thenReturn(true);
+    doNothing().when(bookRepository).deleteById(bookId);
+
+    bookService.deleteLivre(bookId);
+
+    verify(bookRepository, times(1)).existsById(bookId);
+    verify(bookRepository, times(1)).deleteById(bookId);
+  }
 }

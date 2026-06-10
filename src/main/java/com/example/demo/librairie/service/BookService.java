@@ -70,4 +70,11 @@ public class BookService {
 
     return bookRepository.save(existingBook);
   }
+
+  public void deleteLivre(UUID id) {
+    if (!bookRepository.existsById(id)) {
+      throw new RuntimeException("Book not found with id: " + id);
+    }
+    bookRepository.deleteById(id);
+  }
 }
