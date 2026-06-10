@@ -101,14 +101,14 @@ class bookServiceTest {
   void getLivreByGenre_ShouldReturnBooksWithMatchingGenre() {
     UUID genreId = UUID.randomUUID();
     Book book = Book.builder().title("Livre de Science-Fiction").build();
-    when(bookRepository.findByGenresId(genreId)).thenReturn(List.of(book));
+    when(bookRepository.findByGenres_Id(genreId)).thenReturn(List.of(book));
 
     List<Book> result = bookService.getLivreByGenre(genreId);
 
     assertNotNull(result);
     assertEquals(1, result.size());
     assertEquals("Livre de Science-Fiction", result.get(0).getTitle());
-    verify(bookRepository, times(1)).findByGenresId(genreId);
+    verify(bookRepository, times(1)).findByGenres_Id(genreId);
   }
 
   @Test
