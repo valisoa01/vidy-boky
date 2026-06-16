@@ -15,32 +15,32 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthorController {
 
-    private final AuthorService authorService;
+  private final AuthorService authorService;
 
-    @GetMapping
-    public List<AuthorResponse> getAll() {
-        return authorService.getAll();
-    }
+  @GetMapping
+  public List<AuthorResponse> getAll() {
+    return authorService.getAll();
+  }
 
-    @GetMapping("/{id}")
-    public AuthorResponse getById(@PathVariable UUID id) {
-        return authorService.getById(id);
-    }
+  @GetMapping("/{id}")
+  public AuthorResponse getById(@PathVariable UUID id) {
+    return authorService.getById(id);
+  }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public AuthorResponse create(@Valid @RequestBody AuthorRequest request) {
-        return authorService.create(request);
-    }
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public AuthorResponse create(@Valid @RequestBody AuthorRequest request) {
+    return authorService.create(request);
+  }
 
-    @PutMapping("/{id}")
-    public AuthorResponse update(@PathVariable UUID id, @Valid @RequestBody AuthorRequest request) {
-        return authorService.update(id, request);
-    }
+  @PutMapping("/{id}")
+  public AuthorResponse update(@PathVariable UUID id, @Valid @RequestBody AuthorRequest request) {
+    return authorService.update(id, request);
+  }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
-        authorService.delete(id);
-    }
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void delete(@PathVariable UUID id) {
+    authorService.delete(id);
+  }
 }

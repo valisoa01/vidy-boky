@@ -11,9 +11,9 @@ import lombok.*;
 @Builder
 public class AuthorResponse {
 
-    private UUID id;
-    private String fullName;
-    private String firstname;
-    private String lastname;
-    private LocalDate birthDate;
+  private UUID id;
+  private String fullName;
+  private String firstname;
+  private String lastname;
+  private LocalDate birthDate;
 }

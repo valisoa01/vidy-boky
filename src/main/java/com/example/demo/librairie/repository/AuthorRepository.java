@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, UUID> {
 
-    Optional<Author> findByFullName(String fullName);
-    boolean existsByFullName(String fullName);
+  Optional<Author> findByFullName(String fullName);
+
+  boolean existsByFullName(String fullName);
 }

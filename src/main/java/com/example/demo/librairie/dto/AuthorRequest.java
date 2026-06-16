@@ -12,15 +12,15 @@ import lombok.*;
 @Builder
 public class AuthorRequest {
 
-    @NotBlank(message = "Full name is required")
-    @Size(max = 100)
-    private String fullName;
+  @NotBlank(message = "Full name is required")
+  @Size(max = 100)
+  private String fullName;
 
-    @Size(max = 100)
-    private String firstname;
+  @Size(max = 100)
+  private String firstname;
 
-    @Size(max = 100)
-    private String lastname;
+  @Size(max = 100)
+  private String lastname;
 
-    private LocalDate birthDate;
+  private LocalDate birthDate;
 }
