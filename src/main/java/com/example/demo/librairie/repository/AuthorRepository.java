@@ -1,14 +1,15 @@
 package com.example.demo.librairie.repository;
 
-import com.example.demo.librairie.entity.Format;
+import com.example.demo.librairie.entity.Author;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FormatRepository extends JpaRepository<Format, UUID> {
-  Optional<Format> findByFormatType(String formatType);
+public interface AuthorRepository extends JpaRepository<Author, UUID> {
 
-  boolean existsByFormatType(String formatType);
+  Optional<Author> findByFullName(String fullName);
+
+  boolean existsByFullName(String fullName);
 }
