@@ -30,7 +30,7 @@ public class AuthorService {
 
   public AuthorResponse create(AuthorRequest request) {
     if (authorRepository.existsByFullName(request.getFullName())) {
-      throw new IllegalArgumentException("Author already exists: " + request.getFullName());
+      throw new IllegalArgumentException("Author already exist: " + request.getFullName());
     }
     Author author =
         Author.builder()
