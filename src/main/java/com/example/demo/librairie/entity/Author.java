@@ -31,6 +31,6 @@ public class Author {
   @Column(name = "birth_date")
   private LocalDate birthDate;
 
-  @ManyToMany(mappedBy = "authors")
-  private List<Book> books;
+ /* @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+  private List<Book> books;*/
 }
