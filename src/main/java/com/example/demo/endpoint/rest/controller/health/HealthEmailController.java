@@ -1,6 +1,5 @@
 package com.example.demo.endpoint.rest.controller.health;
 
-import static com.example.demo.endpoint.rest.controller.health.PingController.OK;
 import static java.io.File.createTempFile;
 
 import com.example.demo.PojaGenerated;
@@ -74,6 +73,6 @@ public class HealthEmailController {
             "[poja health check 5/5] With attachment",
             null,
             List.of(createTempFile("attachment", ".txt"))));
-    return OK;
+    return ResponseEntity.ok("message");
   }
 }
