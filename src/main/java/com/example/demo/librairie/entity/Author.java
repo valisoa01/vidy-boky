@@ -2,6 +2,7 @@ package com.example.demo.librairie.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 import lombok.*;
 
@@ -30,6 +31,6 @@ public class Author {
   @Column(name = "birth_date")
   private LocalDate birthDate;
 
-  /* @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
-  private List<Book> books;*/
+  @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+  private List<Book> books;
 }
