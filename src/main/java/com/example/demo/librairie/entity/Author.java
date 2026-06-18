@@ -1,5 +1,6 @@
 package com.example.demo.librairie.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -32,5 +33,6 @@ public class Author {
   private LocalDate birthDate;
 
   @ManyToMany(mappedBy = "authors")
+  @JsonIgnore
   private List<Book> books;
 }

@@ -1,5 +1,6 @@
 package com.example.demo.librairie.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 import java.util.UUID;
@@ -18,12 +19,13 @@ public class Genre {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @Column(name = "name", length = 100, nullable = false)
+  @Column(name = "name", length = 100)
   private String name;
 
-  @Column(name = "description", length = 100)
+  @Column(name = "description", length = 255)
   private String description;
 
   @ManyToMany(mappedBy = "genres")
+  @JsonIgnore
   private List<Book> books;
 }

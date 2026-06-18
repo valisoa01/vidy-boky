@@ -1,5 +1,6 @@
 package com.example.demo.librairie.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -42,6 +43,7 @@ public class Book {
       name = "book_genre",
       joinColumns = @JoinColumn(name = "book_id"),
       inverseJoinColumns = @JoinColumn(name = "genre_id"))
+  @JsonIgnore
   private List<Genre> genres;
 
   @ManyToMany
@@ -49,8 +51,10 @@ public class Book {
       name = "book_author",
       joinColumns = @JoinColumn(name = "book_id"),
       inverseJoinColumns = @JoinColumn(name = "author_id"))
+  @JsonIgnore
   private List<Author> authors;
 
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+  @JsonIgnore
   private List<BookFormat> formats;
 }
