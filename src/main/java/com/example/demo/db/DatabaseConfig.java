@@ -10,18 +10,18 @@ import org.springframework.stereotype.Component;
 public class DatabaseConfig {
 
   @Value("${spring.datasource.url}")
-  private String url;
+  private String neonUrl;
 
   @Value("${spring.datasource.username}")
-  private String username;
+  private String neonUsername;
 
   @Value("${spring.datasource.password}")
-  private String password;
+  private String neonPassword;
 
   public Connection getConnection() throws SQLException {
-    if (url == null || username == null || password == null) {
+    if (neonUrl == null || neonUsername == null || neonPassword == null) {
       throw new IllegalStateException("Database env vars not defined: url, username, password");
     }
-    return DriverManager.getConnection(url, username, password);
+    return DriverManager.getConnection(neonUrl, neonUsername, neonPassword);
   }
 }
