@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/genre")
+@RequestMapping("/api/genres")
 @RequiredArgsConstructor
 public class GenreController {
 
