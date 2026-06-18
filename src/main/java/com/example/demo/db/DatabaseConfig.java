@@ -1,20 +1,28 @@
 package com.example.demo.db;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Component
 public class DatabaseConfig {
 
-  private static final String URL = System.getenv("NEON_DB_URL");
-  private static final String USERNAME = System.getenv("NEON_DB_USERNAME");
-  private static final String PASSWORD = System.getenv("NEON_DB_PASSWORD");
+    @Value("${spring.datasource.url}")
+    private String url;
 
-  public static Connection getConnection() throws SQLException {
-    if (URL == null || USERNAME == null || PASSWORD == null) {
-      throw new IllegalStateException(
-          "Database env vars not defined: NEON_DB_URL, NEON_DB_USERNAME, NEON_DB_PASSWORD");
+    @Value("${spring.datasource.username}")
+    private String username;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
+    public Connection getConnection() throws SQLException {
+        if (url == null || username == null || password == null) {
+            throw new IllegalStateException(
+                    "Database env vars not defined: url, username, password");
+        }
+        return DriverManager.getConnection(url, username, password);
     }
-    return DriverManager.getConnection(URL, USERNAME, PASSWORD);
-  }
 }
