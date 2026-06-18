@@ -1,15 +1,14 @@
 package com.example.demo.repository;
 
 import com.example.demo.db.DatabaseConfig;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ProduitRepository {
-    @Autowired
-    private DatabaseConfig databaseConfig;
+  @Autowired private DatabaseConfig databaseConfig;
+
   public List<String> findAll() throws SQLException {
     List<String> produits = new ArrayList<>();
     String sql = "SELECT nom FROM produit";
