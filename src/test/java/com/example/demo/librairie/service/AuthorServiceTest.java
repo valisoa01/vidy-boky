@@ -1,4 +1,4 @@
-package com.example.demo.conf.service;
+package com.example.demo.librairie.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -8,7 +8,6 @@ import com.example.demo.librairie.dto.AuthorRequest;
 import com.example.demo.librairie.dto.AuthorResponse;
 import com.example.demo.librairie.entity.Author;
 import com.example.demo.librairie.repository.AuthorRepository;
-import com.example.demo.librairie.service.AuthorService;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.demo.conf.service;
+package com.example.demo.librairie.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -11,7 +11,6 @@ import com.example.demo.librairie.entity.Genre;
 import com.example.demo.librairie.repository.AuthorRepository;
 import com.example.demo.librairie.repository.BookRepository;
 import com.example.demo.librairie.repository.GenreRepository;
-import com.example.demo.librairie.service.BookService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;

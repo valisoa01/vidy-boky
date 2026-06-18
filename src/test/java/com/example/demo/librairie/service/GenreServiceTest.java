@@ -1,4 +1,4 @@
-package com.example.demo.conf.service;
+package com.example.demo.librairie.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -8,7 +8,6 @@ import com.example.demo.librairie.dto.GenreRequest;
 import com.example.demo.librairie.dto.GenreResponse;
 import com.example.demo.librairie.entity.Genre;
 import com.example.demo.librairie.repository.GenreRepository;
-import com.example.demo.librairie.service.GenreService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;

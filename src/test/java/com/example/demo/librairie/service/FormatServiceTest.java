@@ -1,4 +1,4 @@
-package com.example.demo.conf.service;
+package com.example.demo.librairie.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -8,7 +8,6 @@ import com.example.demo.librairie.dto.FormatRequest;
 import com.example.demo.librairie.dto.FormatResponse;
 import com.example.demo.librairie.entity.Format;
 import com.example.demo.librairie.repository.FormatRepository;
-import com.example.demo.librairie.service.FormatService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
