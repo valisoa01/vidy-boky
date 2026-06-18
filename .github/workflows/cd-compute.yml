@@ -25,6 +25,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: write
+      statuses: write
 
     env:
       AWS_REGION: eu-west-3
